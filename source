@@ -1,0 +1,136 @@
+#include<iostream>
+#include<string>
+using namespace std;
+class NHANVIEN {
+public:
+    void Get() {
+        cout << "Nhap ho ten nhan vien: ";
+        getline(cin, hoten);
+        cout << "Nhap tuoi nhan vien: ";
+        cin >> tuoi;
+        cout << "Nhap ID nhan vien: ";
+        cin.ignore();
+        getline(cin, IDnhanvien);
+        cout << "Nhap so nam kinh nghiem nhan vien: ";
+        cin >> kinh_nghiem;
+    }
+    void Set() {
+        cout << "Ho ten nhan vien: " << hoten << endl;
+        cout << "Tuoi nhan vien: " << tuoi << endl;
+        cout << "ID nhan vien: " << IDnhanvien << endl;
+        cout << "So nam kinh nghiem nhan vien: " << kinh_nghiem << endl;
+    }
+protected:
+    string hoten;
+    int tuoi;
+    string IDnhanvien;
+    int kinh_nghiem;
+};
+class KI_SU_PHAN_MEM :public NHANVIEN {
+public:
+    void Get() {
+        NHANVIEN::Get();
+        cout << "Nhap so tien luong(VND): ";
+        cin >> tien_luong;
+        cout << "Nhap so phan mem da hoan thanh trong 1 thang: ";
+        cin >> nang_suat;
+        cout << "Nhap danh gia cua khach hang (0sao-5sao): ";
+        cin.ignore();
+        getline(cin, danh_gia);
+    }
+    void Set() {
+        NHANVIEN::Set();
+        cout << "Tien luong: " << tien_luong << endl;
+        cout << "So trang web da hoan thanh trong 1 thang: " << nang_suat << endl;
+        cout << "Danh gia cua khach hang: " << danh_gia << endl;
+    }
+private:
+    int tien_luong;
+    int nang_suat;
+    string danh_gia;
+};
+class DEV_WEB :public NHANVIEN {
+public:
+    void Get() {
+        NHANVIEN::Get();
+        cout << "Nhap so tien luong(VND): ";
+        cin >> tien_luong;
+        cout << "Nhap so trang web da hoan thanh trong 1 thang: ";
+        cin >> nang_suat;
+        cout << "Nhap danh gia cua khach hang (0sao-5sao): ";
+        cin.ignore();
+        getline(cin, danh_gia);
+    }
+    void Set() {
+        NHANVIEN::Set();
+        cout << "Tien luong: " << tien_luong << endl;
+        cout << "So trang web da hoan thanh trong 1 thang: " << nang_suat << endl;
+        cout << "Danh gia cua khach hang: " << danh_gia << endl;
+    }
+private:
+    int tien_luong;
+    int nang_suat;
+    string danh_gia;
+};
+void MENU() {
+    cout << "\n\n\t\tQUAN LY NHAN VIEN\n";
+    cout << "1.Nhap thong tin ki su phan mem" << endl;
+    cout << "2.Nhap thong tin dev web" << endl;
+    cout << "3.Xuat thong tin cac nhan vien" << endl;
+    cout << "4.Ket thuc" << endl;
+}
+int main() {
+    int n = 0;
+    int m = 0;
+    KI_SU_PHAN_MEM* a[100];
+    DEV_WEB* b[100];
+    while (true) {
+        MENU();
+        int luachon;
+        cout << "\n\nNhap lua chon: ";
+        cin >> luachon;
+        int h = 1;
+        if (luachon == 1) {
+            system("cls");
+            cout << "\nNHAP THONG TIN KI SU PHAN MEM THU " << n + 1 << "\n\n";
+            KI_SU_PHAN_MEM* nv = new KI_SU_PHAN_MEM;
+            cin.ignore();
+            nv->Get();
+            a[n] = nv;
+            n++;
+            system("cls");
+        }
+        if (luachon == 2) {
+            system("cls");
+            cout << "\nNHAP THONG TIN DEV WEB THU " << m + 1 << "\n\n";
+            DEV_WEB* nv = new DEV_WEB;
+            cin.ignore();
+            nv->Get();
+            b[m] = nv;
+            m++;
+            system("cls");
+        }
+        if (luachon == 3) {
+            system("cls");
+            cout << "\n\n\t\tTHONG TIN CAC NHAN VIEN\n\n";
+            for (int i = 0; i < n; i++) {
+                cout << "\n\tThong tin nhan vien thu " << h<< endl;
+                a[i]->Set();
+                h++;
+            }
+            for (int i = 0; i <m; i++) {
+                cout << "\n\tThong tin nhan vien thu " << h << endl;
+                b[i]->Set();
+                h++;
+            }
+            system("pause");
+            system("cls");
+        }
+        if (luachon == 4) {
+            system("cls");
+            cout << "*****************";
+            return 0;
+        }
+    }
+    return 0;
+}
